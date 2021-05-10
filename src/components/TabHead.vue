@@ -1,12 +1,11 @@
 <template>
        <van-nav-bar :title="title" fixed>
       <template #left>
-        <van-icon name="arrow-left" size="18" @click="goBack" v-if="title!='首页'"/>
+        <van-icon name="arrow-left" size="18" @click="goBack" v-if="title!='我的首页'"/>
+        <van-icon name="user-circle-o" size="24"  v-if="title=='我的首页'"/>
       </template>
     </van-nav-bar>
-
-</template>
-           
+</template>     
 <script lang="ts">
 import { defineComponent, ref, reactive, toRefs} from "vue"
 import {useRouter} from "vue-router"

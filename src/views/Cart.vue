@@ -107,13 +107,13 @@ export default defineComponent({
         {
           id: 1,
           thumb_path: require("../assets/imgs/xiaomi.jpeg"),
-          title: "小米11 Pro 轻装上阵，256g三网通5g",
-          sell_price: 4699
+          title: "小米11 Pro 送给小哲子的手机，256g三网通5g",
+          sell_price: 5199
         },
         {
           id: 2,
           thumb_path: require("../assets/imgs/pingguo.jpeg"),
-          title: "小米11 Pro 轻装上阵，256g三网通5g",
+          title: "苹果12 A15芯片，128g三网通5g",
           sell_price: 4699
         },
         {
@@ -129,7 +129,7 @@ export default defineComponent({
       store.car.forEach((item: any) => {
         idArr.push(item.id);
       });
-      
+
      }
     const buynumChanged = (buynum: number, id: number) => {
       commit("updateCar", {

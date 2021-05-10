@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <TabHead title="首页"></TabHead>
+    <TabHead title="我的首页"></TabHead>
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
       <van-swipe-item v-for="item in lunbotuList" :key="item.id">
         <img :src="item.img" alt />
@@ -15,18 +15,23 @@
         :to="item.to"
       />
     </van-grid>
+        <div class="shopList">商品列表</div>
+      <shopList :shopList="shopList"></shopList>
   </div>
 </template>
            
 <script>
 import { defineComponent, ref, reactive, toRefs } from "vue";
-import { Toast} from "vant";
+import { Toast } from "vant";
 import TabHead from "@/components/TabHead.vue";
+import shopList from "@/components/ShopList.vue";
 import { getLunbotu } from "@/utils/api/index";
 export default defineComponent({
   components: {
-    TabHead
+    TabHead,
+    shopList
   },
+  props:["shopList"],
   setup() {
     //状态数据
     const state = reactive({
@@ -87,6 +92,36 @@ export default defineComponent({
           title: "联系我们",
           to: "/"
         }
+      ],
+      shopList:[
+        {
+          id:1,
+          price:"3000.00",
+          desc:"超强的待机能力和使用寿命，完美的贴合现代人的使用标准",
+          title:"红米K40",
+          thumb:require("../assets/imgs/photo6.jpeg")
+        },
+          {
+          id:2,
+          price:"4999.00",
+          desc:"欢迎来到5g时代的今天，使用小米11有更高的刷新率和2k的分辨率，可以拍月亮哦",
+          title:"小米11",
+          thumb:require("../assets/imgs/xiaomi.jpeg")
+        },
+          {
+          id:3,
+          price:"4699.00",
+          desc:"作为佳能最受女生喜欢的单反，虽然是入门级的水准，但是在摆设的效果和美观上丝毫不逊色其他机型",
+          title:"佳能 Es300",
+          thumb:require("../assets/imgs/jianeng.jpeg")
+        },
+          {
+          id:4,
+          price:"6999.00",
+          desc:"苹果今年的旗舰机，依然保持着国内较高的出货率，90hz的刷新以及5G的网络速度，让这款手机在旗舰中成为佼佼者",
+          title:"苹果12",
+          thumb:require("../assets/imgs/pingguo.jpeg")
+        },
       ]
     });
 
@@ -95,10 +130,10 @@ export default defineComponent({
       try {
         const { result } = await getLunbotu();
         state.lunbotuList = result.message;
-        Toast('加载成功')
+        Toast("加载成功");
       } catch (err) {
         console.log(err);
-        Toast('加载失败')
+        Toast("加载失败");
       }
     };
     //请求轮播图数据
@@ -108,7 +143,7 @@ export default defineComponent({
   }
 });
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .my-swipe {
   height: 200px;
   .van-swipe-item {
@@ -125,5 +160,11 @@ export default defineComponent({
   .van-grid-item__icon {
     font-size: 56px;
   }
+}
+.shopList{
+  font-size: 16px;
+  color: rgb(58, 56, 56);
+  height: 20px;
+  margin: 15px 10px 0 10px;
 }
 </style>
