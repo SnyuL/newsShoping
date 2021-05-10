@@ -1,5 +1,6 @@
 <template>
   <div>
+    <TabHead title="新闻详情"></TabHead>
     <van-skeleton title :row="3" :loading="loading">
       <div class="title">{{ newsinfo.title }}</div>
       <div class="time">{{ timeHandler(newsinfo.add_time) }}</div>
@@ -15,10 +16,12 @@ import { Toast } from "vant";
 import moment from "moment";
 import { NewsInfoUrl } from "@/utils/api/index";
 import Comment from "@/components/Comment.vue"
+import TabHead from "@/components/TabHead.vue"
 export default defineComponent({
   props: ["id"],
    components: {
-    Comment
+    Comment,
+    TabHead
   },
   setup(props: any, context) {
     //获取动态路由参数

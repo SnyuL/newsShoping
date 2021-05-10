@@ -12,6 +12,7 @@ export default createStore<stateType>({
     car:[]
   },
   mutations: {
+    
     addToCar(state, goodsinfo:goodType){
       var flag:boolean = false;
       //1.看要添加的商品在购物车中是否存在
@@ -36,6 +37,23 @@ export default createStore<stateType>({
         }
       })
     },
+    removeFormCar(state,id){
+      // 根据Id，从store 中的购物车中删除对应的那条商品数据
+      state.car.some((item,index)=>{
+        if(item.id ==id){
+          state.car.splice(index,1)
+          return true
+        }
+      })
+    },
+    updateGoodsSelected(state, info) {
+      // console.log(this.getters.getGoodsSelected);
+      state.car.some(item => {
+          if (item.id == info.id) {
+              item.selected = info.selected
+          }
+      })
+  }
 
   },
   getters:{
@@ -53,8 +71,28 @@ export default createStore<stateType>({
         obj[item.id] = item.count;
       })
       return obj
+    },
+    getGoodsSelected(state) {
+      var o = {}
+      state.car.forEach(item => {
+          o[item.id] = item.selected
+      })
+      return o
+  },
+  getGoodsCountAndAmount(state) {
+    var o = {
+        count: 0, // 勾选的数量
+        amount: 0 // 勾选的总价
     }
-
+    state.car.forEach(item => {
+        if (item.selected) {
+            o.count += item.count
+            o.amount += item.price * item.count
+        }
+    })
+    return o
+}
+    
   },
   actions: {
   },

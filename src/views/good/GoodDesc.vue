@@ -1,13 +1,21 @@
 <template>
-  <div class="box">
-    <p class="title">{{ info.title }}</p>
-    <p class="content" v-html="info.content"></p>
+  <div>
+    <TabHead title="商品详情"></TabHead>
+
+    <div class="box">
+      <p class="title">{{ info.title }}</p>
+      <p class="content" v-html="info.content"></p>
+    </div>
   </div>
 </template>
            
 <script lang="ts">
 import { defineComponent, ref, reactive, toRefs, computed } from "vue";
+import TabHead from "../../components/TabHead.vue"
 export default defineComponent({
+  components:{
+TabHead
+  },
   props: ["id"],
   setup(props: any, context) {
     const state = reactive({
@@ -19,7 +27,7 @@ export default defineComponent({
       },
       id: props.id
     });
-    return {...toRefs(state)}
+    return { ...toRefs(state) };
   }
 });
 </script>

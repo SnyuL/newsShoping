@@ -1,5 +1,6 @@
 <template>
   <div class="news">
+    <TabHead title="新闻列表"></TabHead>
     <van-list @loading="loading" :finished="finished" finished-text="没有更多了" @load="getNewsList">
       <van-cell v-for="item in list" :to="'/NewsInfo/'+item.id" :key="item.id" :icon="item.img_url">
         <template #title>
@@ -16,10 +17,14 @@
            
 <script lang='ts'>
 import { defineComponent, ref, reactive, toRefs, computed } from "vue";
+import TabHead from "@/components/TabHead.vue"
 import { NewslistUrl } from "../../utils/api/index";
 import { Toast } from "vant";
 import moment from "moment";
 export default defineComponent({
+  components:{
+    TabHead
+  },
   setup() {
     const state = reactive({
       list: [

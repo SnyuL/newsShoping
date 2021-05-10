@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <TabHead title="首页"></TabHead>
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
       <van-swipe-item v-for="item in lunbotuList" :key="item.id">
         <img :src="item.img" alt />
@@ -20,8 +21,12 @@
 <script>
 import { defineComponent, ref, reactive, toRefs } from "vue";
 import { Toast} from "vant";
+import TabHead from "@/components/TabHead.vue";
 import { getLunbotu } from "@/utils/api/index";
-export default {
+export default defineComponent({
+  components: {
+    TabHead
+  },
   setup() {
     //状态数据
     const state = reactive({
@@ -101,7 +106,7 @@ export default {
 
     return { ...toRefs(state) };
   }
-};
+});
 </script>
 <style lang="scss">
 .my-swipe {

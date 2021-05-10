@@ -1,5 +1,7 @@
 <template>
   <div>
+    <TabHead title="商品详情"></TabHead>
+
     <!--1.图片轮播-->
     <div class="box">
       <van-swipe :autoplay="3000">
@@ -49,8 +51,11 @@ import { defineComponent, ref, reactive, toRefs, computed } from "vue";
 import { Toast } from "vant";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
-
+import TabHead from "@/components/TabHead.vue";
 export default defineComponent({
+  components: {
+    TabHead
+  },
   props: ["id"],
   setup(props: any, context) {
     const router = useRouter();
@@ -81,7 +86,7 @@ export default defineComponent({
       }
       state.ballFlag = !state.ballFlag;
       // 拼接出一个要保存到store中car数组里的商品信息对象
-      var goodsinfo= {
+      var goodsinfo = {
         id: state.id,
         count: state.buynum,
         price: state.goodsinfo.sell_price,
@@ -122,7 +127,7 @@ export default defineComponent({
       console.log("afterEnter");
       el.style.transition = null;
       state.ballFlag = !state.ballFlag;
-      state.animFinished = true
+      state.animFinished = true;
     };
     return {
       ...toRefs(state),

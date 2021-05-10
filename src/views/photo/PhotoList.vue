@@ -1,5 +1,6 @@
 <template>
   <div>
+    <TabHead title="图片列表"></TabHead>
     <van-tabs animated v-model="activeID" @click="tabItemClick">
       <van-tab :name="item.id" :key="item.id" v-for="item in cates" :title="item.title">
         <ul class="photo-list">
@@ -18,8 +19,12 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive, toRefs } from "vue";
+import TabHead from "@/components/TabHead.vue"
 import { Toast } from "vant";
 export default defineComponent({
+  components:{
+TabHead
+  },
   setup() {
     const state = reactive({
       cates: [

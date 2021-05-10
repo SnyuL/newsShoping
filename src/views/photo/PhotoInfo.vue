@@ -1,5 +1,7 @@
 <template>
   <div>
+    <TabHead title="图片详情"></TabHead>
+
     <!--头部区域-->
     <div class="header">
       <h4 class="title">{{ photoinfo.title }}</h4>
@@ -23,8 +25,12 @@
 <script lang="ts">
 import { defineComponent, ref, reactive, toRefs, computed } from "vue";
 import { Toast, ImagePreview } from "vant";
+import TabHead from "@/components/TabHead.vue"
 import moment from "moment";
 export default defineComponent({
+  components:{
+    TabHead
+  },
   props: ["id"],
   setup(props) {
     const state = reactive({

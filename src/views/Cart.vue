@@ -1,44 +1,43 @@
 <template>
   <div>
+    <TabHead title="购物车"></TabHead>
     <van-cell-group>
-    <van-cell v-for="item in goodslist" :key="item.id">
+      <van-cell v-for="item in goodslist" :key="item.id">
         <template #icon>
-            <div class="icon">
-                <van-checkbox v-model="checked"></van-checkbox>
-                <van-image
-                           width="5rem"
-                           height="3rem"
-                           fit="contain"
-                           :src="item.thumb_path"
-                           />
-            </div>
+          <div class="icon">
+            <van-checkbox
+              v-model="itemSelected[item.id]"
+              @change="itemSelectedChanged($event, item.id)"
+            ></van-checkbox>
+            <van-image width="5rem" height="3rem" fit="contain" :src="item.thumb_path" />
+          </div>
         </template>
-        <template #title
-                  ><div class="title">{{ item.title }}</div></template
-            >
+        <template #title>
+          <div class="title">{{ item.title }}</div>
+        </template>
         <template #label>
-            <div class="label">
-                <span class="price">￥{{ item.sell_price }}</span>
-                <van-stepper
-                             v-model="getters.getGoodsCount[item.id]"
-                             min="1"
-                             button-size="24px"
-                             disable-input
-                             @change="buynumChanged($event, item.id)"
-                             />
-                <van-button type="info" size="small">删除</van-button>
-            </div>
+          <div class="label">
+            <span class="price">￥{{ item.sell_price }}</span>
+            <van-stepper
+              v-model="getters.getGoodsCount[item.id]"
+              min="1"
+              button-size="24px"
+              disable-input
+              @change="buynumChanged($event, item.id)"
+            />
+            <van-button type="info" size="small" @click.prevent="remove(item.id, i)">删除</van-button>
+          </div>
         </template>
-    </van-cell>
-</van-cell-group>
+      </van-cell>
+    </van-cell-group>
 
     <div class="jiesuan">
       <div class="left">
-        <p>总计1000</p>
+        <p>总计{{ getters.getAllGoodCount }}</p>
         <p>
           已勾选
-          <span class="red">10</span> 件，总价
-          <span class="red">￥10000</span>
+          <span class="red">{{ getters.getGoodsCountAndAmount.count }}</span> 件，总价
+          <span class="red">￥{{ getters.getGoodsCountAndAmount.amount }}</span>
         </p>
       </div>
       <van-button type="danger">去结算</van-button>
@@ -93,41 +92,60 @@
 import { defineComponent, ref, reactive, toRefs, computed } from "vue";
 import { Toast } from "vant";
 import { useStore } from "vuex";
+import TabHead from "@/components/TabHead.vue";
 export default defineComponent({
+  components: {
+    TabHead
+  },
   setup(props) {
+    const { state: store, getters, commit } = useStore();
     const state = reactive({
       checked: true,
       buynum: 1,
-    goodslist: [
+      itemSelected: getters.getGoodsSelected,
+      goodslist: [
         {
-            id:1,
-            thumb_path:require("../assets/imgs/xiaomi.jpeg"),
-            title:"小米11 Pro 轻装上阵，256g三网通5g",
-            sell_price:4699
+          id: 1,
+          thumb_path: require("../assets/imgs/xiaomi.jpeg"),
+          title: "小米11 Pro 轻装上阵，256g三网通5g",
+          sell_price: 4699
         },
-         {
-            id:2,
-            thumb_path:require("../assets/imgs/pingguo.jpeg"),
-            title:"小米11 Pro 轻装上阵，256g三网通5g",
-            sell_price:4699
+        {
+          id: 2,
+          thumb_path: require("../assets/imgs/pingguo.jpeg"),
+          title: "小米11 Pro 轻装上阵，256g三网通5g",
+          sell_price: 4699
         },
-         {
-            id:3,
-            thumb_path:require("../assets/imgs/jianeng.jpeg"),
-            title:"小米11 Pro 轻装上阵，256g三网通5g",
-            sell_price:4699
+        {
+          id: 3,
+          thumb_path: require("../assets/imgs/jianeng.jpeg"),
+          title: "小米11 Pro 轻装上阵，256g三网通5g",
+          sell_price: 4699
         }
-    ],
+      ]
     });
-    const { state: store, getters, commit } = useStore();
-     const buynumChanged = (buynum: number, id: number) => {
+     const getGoodsList = () => {
+      var idArr: any[] = [];
+      store.car.forEach((item: any) => {
+        idArr.push(item.id);
+      });
+      
+     }
+    const buynumChanged = (buynum: number, id: number) => {
       commit("updateCar", {
         id,
-        count: buynum,
+        count: buynum
       });
     };
-
-    return { ...toRefs(state), getters,buynumChanged  };
-  },
+    const remove = (id: number, index: number) => {
+      // 点击删除，把商品从 store 中根据 传递的 Id 删除，同时，把 当前组件中的 goodslist 中，对应要删除的那个商品，使用 index 来删除
+      state.goodslist.splice(index, 1);
+      commit("removeFormCar", id);
+    };
+    const itemSelectedChanged = (isSelected: boolean, id: number) => {
+      commit("updateGoodsSelected",{id:id,selected: isSelected,})
+    };
+    return { ...toRefs(state), getters, buynumChanged, remove,itemSelectedChanged,getGoodsList };
+  }
 });
 </script>
