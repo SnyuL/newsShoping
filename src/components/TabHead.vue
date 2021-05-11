@@ -1,5 +1,5 @@
 <template>
-       <van-nav-bar :title="title" fixed>
+      <van-nav-bar :title="title" fixed>
       <template #left>
         <van-icon name="arrow-left" size="18" @click="goBack" v-if="title!='我的首页'"/>
         <van-icon name="user-circle-o" size="24"  v-if="title=='我的首页'"/>

@@ -125,7 +125,7 @@ export default defineComponent({
       ]
     });
      const getGoodsList = () => {
-      var idArr: any[] = [];
+      var idArr: any[] = state.goodslist;
       store.car.forEach((item: any) => {
         idArr.push(item.id);
       });

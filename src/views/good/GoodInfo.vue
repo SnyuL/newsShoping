@@ -18,9 +18,9 @@
         <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
           <div class="ball" v-show="ballFlag" ref="ballRef"></div>
         </transition>市场价：
-        <del>{{ goodsinfo.market_price }}</del>
+        <del>￥{{ goodsinfo.market_price }}</del>
         销售价：
-        <span class="now_price">{{ goodsinfo.sell_price }}</span>
+        <span class="now_price">￥{{ goodsinfo.sell_price }}</span>
       </p>
       <p class="buynum">
         购买数量：
@@ -68,8 +68,8 @@ export default defineComponent({
       id: props.id,
       goodsinfo: {
         title: "华为（HUAWEI）Mate40 Pro 256G双5G",
-        market_price: "￥5699",
-        sell_price: "￥5299",
+        market_price: "5699",
+        sell_price: "5299",
         stock_quantity: 60,
         goods_no: "SD9102356032",
         add_time: "2020-04-20 00:51:03"
