@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    
     <van-tabbar v-model="active" active-color="#26a2ff">
       <van-tabbar-item to="/" icon="home-o">首页</van-tabbar-item>
       <van-tabbar-item to="/member" icon="friends-o">会员</van-tabbar-item>
@@ -40,7 +39,7 @@ export default defineComponent({
 }
 
 .container {
-  // padding-top: 46px;
+  padding-top: 46px;
   padding-bottom: 50px;
   /*避免PC端网页在页面切换的时候出现的水平滚动条*/
   overflow: hidden;

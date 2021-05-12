@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <TabHead title="会员"></TabHead>
     <v-chart class="chart" :option="option" />
     <v-chart class="chart2" :option="option2" />
@@ -203,7 +203,6 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .chart {
-  margin-top: 10px;
   height: 250px;
   background-color: rgb(99, 98, 98);
 }

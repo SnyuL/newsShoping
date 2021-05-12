@@ -17,6 +17,7 @@
     </van-grid>
         <div class="shopList">商品列表</div>
       <shopList :shopList="shopList"></shopList>
+          <Weather class="weather"></Weather>
   </div>
 </template>
            
@@ -25,11 +26,13 @@ import { defineComponent, ref, reactive, toRefs } from "vue";
 import { Toast } from "vant";
 import TabHead from "@/components/TabHead.vue";
 import shopList from "@/components/ShopList.vue";
+import Weather from "@/components/Weather.vue";
 import { getLunbotu } from "@/utils/api/index";
 export default defineComponent({
   components: {
     TabHead,
-    shopList
+    shopList,
+    Weather
   },
   props:["shopList"],
   setup() {
@@ -166,5 +169,13 @@ export default defineComponent({
   color: rgb(58, 56, 56);
   height: 20px;
   margin: 15px 10px 0 10px;
+}
+.weather{
+  z-index: 2;
+  position: fixed;
+  top: 8px;
+  width: 80px;
+  height: 40px;
+  right: 50px;
 }
 </style>
