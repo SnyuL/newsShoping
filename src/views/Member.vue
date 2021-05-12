@@ -107,7 +107,7 @@ export default defineComponent({
         align: "right",
         itemHeight: "14",
         itemWidth: "14",
-        data: ["苹果", "小米", "华为", "三星", "vivo", "oppo"]
+        data: ["苹果", "小米", "华为", "三星", "vivo", "oppo","一加"]
       },
 
       series: [
@@ -126,7 +126,8 @@ export default defineComponent({
             { value: 900, name: "华为" },
             { value: 135, name: "三星" },
             { value: 548, name: "vivo" },
-            { value: 648, name: "oppo" }
+            { value: 648, name: "oppo" },
+            { value: 348, name: "一加" }
           ],
           emphasis: {
             scale: "true",
@@ -183,7 +184,7 @@ export default defineComponent({
           name: "购买量",
           type: "bar",
           barWidth: "60%",
-          data: [15, 52, 200, 334, 390, 330, 220],
+          data: [15, 52, 200, 334, 400, 330, 220],
           color: "skyblue",
           showBackground: true,
           backgroundStyle: {
