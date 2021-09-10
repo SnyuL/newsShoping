@@ -20,3 +20,9 @@ export const NewsInfoUrl = data => {
     data
   })
 }
+export const mockGet = () => {
+  return request({
+    method: 'get',
+    url: '/api/get',//模拟数据
+  })
+}
